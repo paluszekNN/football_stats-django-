@@ -1,0 +1,86 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<h1>Players</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Weights</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<table class="table" data-toggle="table" data-sort-name="name" data-sort-order="asc">
+    <thead class="thead-light">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            {% for player in players %}
+                {% if player.name|first != player.name|first|upper and player.name != "id" and player.name != "team" and player.name != "name" and player.name != "age" and player.name != "position" and player.name != "club" and player.name != "league" and player.name != "rating" %}
+                <th><input id={{player.name}} type="text" placeholder="0"></th>
+                {% endif %}
+            {% endfor %}
+            <th></th>
+        </tr>
+        <tr>
+            {% for player in players %}
+                {% if player.name|first != player.name|first|upper and player.name != "id" and player.name != "team" %}
+                <th data-field={{player.name}} data-sortable="true" scope="col">{{player.name}}</th>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for player in players %}
+
+    {% if player.name|first == player.name|first|upper %}
+    <tr>
+        <td>{{player.name}}</td>
+        <td>{{player.age}}</td>
+        <td>{{player.position}}</td>
+        <td>{{player.club}}<a class="btn btn-warning" href=delete_club/{{player.split_club|join:"%20"}}>delete</a></td>
+        <td>{{player.league}}<a class="btn btn-warning" href=delete_league/{{player.split_league|join:"%20"}}>delete</a></td>
+        <td id="rate">{{player.rate}}</td>
+        <td>{{player.goals}}</td>
+        <td>{{player.assists}}</td>
+        <td>{{player.minutes}}</td>
+        <td>{{player.accurate_passes}}</td>
+        <td>{{player.passes}}</td>
+        <td>{{player.created_situations}}</td>
+        <td>{{player.key_passes}}</td>
+        <td>{{player.dribble}}</td>
+        <td>{{player.fouls_on}}</td>
+        <td>{{player.offsides}}</td>
+        <td>{{player.mistakes}}</td>
+        <td>{{player.culpable_goals}}</td>
+        <td>{{player.accurate_cross}}</td>
+        <td>{{player.heads}}</td>
+        <td>{{player.tackles}}</td>
+        <td>{{player.key_heads}}</td>
+        <td>{{player.interceptions}}</td>
+        <td>{{player.catch_saves}}</td>
+        <td>{{player.saves}}</td>
+        <td>{{player.saves_on_corner}}</td>
+        <td>{{player.complete_tackles}}</td>
+        <td>{{player.accurate_shots}}</td>
+        <td>{{player.shots}}</td>
+        <td>{{player.key_tackles}}</td>
+        <td>{{player.win_heads}}</td>
+        <td>{{player.crosses}}</td>
+        <td>{{player.rating}}</td>
+    </tr>
+    {% endif%}
+
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
